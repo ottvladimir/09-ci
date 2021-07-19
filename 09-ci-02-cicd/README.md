@@ -2,7 +2,7 @@
 
 ## Знакомоство с SonarQube
 
-image
+![SonarQubeimage](IMG_20210719_150451_452.jpg)
 
 
 ## Знакомство с Nexus
