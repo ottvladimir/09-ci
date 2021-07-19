@@ -9,24 +9,21 @@ image
 
 ### Подготовка к выполнению
 
-1. Выполняем `docker pull sonatype/nexus3`
-2. Выполняем `docker run -d -p 8081:8081 --name nexus sonatype/nexus3`
-3. Ждём запуск, смотрим логи через `docker logs -f nexus`
-4. Проверяем готовность сервиса через [бразуер](http://localhost:8081)
-5. Узнаём пароль от admin через `docker exec -it nexus /bin/bash`
-6. Подключаемся под админом, меняем пароль, сохраняем анонимный доступ
-
-### Основная часть
-
-1. В репозиторий `maven-public` загружаем артефакт с GAV параметрами:
-   1. groupId: netology
-   2. artifactId: java
-   3. version: 8_282
-   4. classifier: distrib
-   5. type: tar.gz
-2. В него же загружаем такой же артефакт, но с version: 8_102
-3. Проверяем, что все файлы загрузились успешно
-4. В ответе присылаем файл `maven-metadata.xml` для этого артефекта
+```xml 
+   <metadata modelVersion="1.1.0">
+      <groupId>netology</groupId>
+      <artifactId>java</artifactId>
+      <versioning>
+         <latest>8_282</latest>
+         <release>8_282</release>
+         <versions>
+            <version>8_102</version>
+            <version>8_282</version>
+         </versions>
+         <lastUpdated>20210719042450</lastUpdated>
+      </versioning>
+   </metadata>
+```
 
 ### Знакомство с Maven
 
