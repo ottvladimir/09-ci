@@ -6,6 +6,7 @@ Docker Agent templates
 &nbsp;&nbsp;Labels `ansible_docker`  
 &nbsp;&nbsp;Docker Image `aragast/agent:7`  
 &nbsp;&nbsp;Pull strategy `Pull once and update latest`
+# Настраиваю джобу
 
 
 
