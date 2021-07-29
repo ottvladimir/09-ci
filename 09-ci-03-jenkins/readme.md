@@ -8,6 +8,7 @@ Docker Agent templates
 &nbsp;&nbsp;Pull strategy `Pull once and update latest`
 ## Freestyle
 ### Настраиваю джобу
+Git::Repository URL::`https://github.com/ottvladimir/example-playbook.git`
 ```bash
 ansible-vault decrypt secret --vault-password-file vault_pass
 mkdir ~/.ssh
