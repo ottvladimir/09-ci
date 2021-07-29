@@ -10,6 +10,7 @@ Docker Agent templates
 ### Настраиваю джобу
 ```bash
 ansible-vault decrypt secret --vault-password-file vault_pass
+mkdir ~/.ssh
 mv ./secret ~/.ssh/id_rsa
 chmod 400 ~/.ssh/id_rsa
 ansible-galaxy install -r requirements.yml -p roles
