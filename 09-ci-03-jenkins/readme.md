@@ -11,9 +11,9 @@ Docker Agent templates
 Git::Repository URL::`https://github.com/ottvladimir/example-playbook.git`
 ```bash
 ansible-vault decrypt secret --vault-password-file vault_pass
-ssh-keyscan -t rsa github.com | tee github-key-temp | ssh-keygen -lf -
-cat github-key-temp >> ~/.ssh/known_hosts^C
 mkdir ~/.ssh
+ssh-keyscan -t rsa github.com | tee github-key-temp | ssh-keygen -lf -
+cat github-key-temp >> ~/.ssh/known_hosts
 mv ./secret ~/.ssh/id_rsa
 chmod 400 ~/.ssh/id_rsa
 ansible-galaxy install -r requirements.yml -p roles
