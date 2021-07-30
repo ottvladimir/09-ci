@@ -64,7 +64,7 @@ pipeline {
 }
 ```
 ## Scripted 
-```
+```groovy
 node("ansible_docker"){
     stage("Git checkout"){
         git credentialsId: 'jenkins_script', url: 'git@github.com:ottvladimir/example-playbook.git'
