@@ -63,3 +63,29 @@ pipeline {
     }
 }
 ```
+## Scripted 
+```
+node("ansible_docker"){
+    stage("Git checkout"){
+        git credentialsId: 'jenkins_script', url: 'git@github.com:ottvladimir/example-playbook.git'
+    }
+    stage("Check ssh key"){
+        secret_check=true
+    }
+    stage('ADD_SSH_SETTINGS') {
+        sh 'ssh-keyscan -t rsa github.com | tee github-key-temp | ssh-keygen -lf -'
+        sh 'cat github-key-temp >> ~/.ssh/known_hosts'
+        sh 'ansible-vault decrypt secret --vault-password-file vault_pass'
+        sh 'mv ./secret ~/.ssh/id_rsa && chmod 400 ~/.ssh/id_rsa'
+    }
+    stage("Run playbook"){
+        if (secret_check){
+            sh 'ansible-galaxy install -r requirements.yml -p roles'
+            sh 'ansible-playbook site.yml -i inventory/prod.yml'
+        }
+        else{
+            echo 'no more keys'
+        }
+    }
+}
+```
