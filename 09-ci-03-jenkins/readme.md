@@ -21,7 +21,7 @@ ansible-playbook site.yml -i inventory/prod.yml
 ls -lah roles
 ```
 ## Declarative
-```bash
+```Jenkinsfile
 pipeline {
     agent any
 
