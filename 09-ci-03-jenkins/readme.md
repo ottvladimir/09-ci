@@ -37,24 +37,27 @@ pipeline {
                 sh 'ssh-keyscan -t rsa github.com | tee github-key-temp | ssh-keygen -lf -'
                 sh 'cat github-key-temp >> ~/.ssh/known_hosts'
                 }
-        }    
+        }
         stage('DECRYPT_VAULT') {
             steps {
-                sh 'cd example-playbook'
-                sh 'ansible-vault decrypt secret --vault-password-file vault_pass'
-                sh 'mv ./secret ~/.ssh/id_rsa'
-                sh 'chmod 400 ~/.ssh/id_rsa'
-                    }
+                dir("example-playbook"){
+                    sh 'ansible-vault decrypt secret --vault-password-file vault_pass'
+                    sh 'mv ./secret ~/.ssh/id_rsa'
+                    sh 'chmod 400 ~/.ssh/id_rsa'
+                }
+            }
         }
         stage('RUN_ANSIBLE') {
             steps {
-                sh 'ansible-galaxy install -r requirements.yml -p roles'
-                sh 'ansible-playbook site.yml -i inventory/prod.yml'
+                dir("example-playbook"){
+                    sh 'ansible-galaxy install -r requirements.yml -p roles'
+                    sh 'ansible-playbook site.yml -i inventory/prod.yml'
+                }
             }
         }
         stage('RUN_SOMETHING') {
             steps {
-                sh 'ls -lah roles'
+                sh 'ls -lah example-playbook/roles'
             }
         }    
     }
