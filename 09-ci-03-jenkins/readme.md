@@ -21,11 +21,16 @@ ansible-playbook site.yml -i inventory/prod.yml
 ls -lah roles
 ```
 ## Declarative
-```pipline
+```bash
 pipeline {
     agent any
 
     stages {
+        stage('CLONE_GIT_REPO') {
+            steps {
+                sh 'git clone https://github.com/ottvladimir/example-playbook.git'
+                }
+        }
         stage('ADD_SSH_SETTINGS') {
             steps {
                 sh 'mkdir ~/.ssh'
@@ -35,6 +40,7 @@ pipeline {
         }    
         stage('DECRYPT_VAULT') {
             steps {
+                sh 'cd example-playbook'
                 sh 'ansible-vault decrypt secret --vault-password-file vault_pass'
                 sh 'mv ./secret ~/.ssh/id_rsa'
                 sh 'chmod 400 ~/.ssh/id_rsa'
