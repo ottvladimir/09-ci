@@ -2,8 +2,8 @@
 
 ## Подготовка к выполнению
 
-1. `$ mkdir -p teamcity/data teamcity/logs`
-    ` chmod -R go+w teamcity`
+1. `$ mkdir -p teamcity/data teamcity/logs && chmod -R go+w teamcity`
+    ``
     Поднимите инфраструктуру [teamcity](./teamcity/docker-compose.yml)
     ```yml
     version: "3"
@@ -22,7 +22,7 @@
         volumes:
           - ~/teamcity/agent/:/data/teamcity_agent/conf 
         environment:
-          SERVER_URL: "http://ip172-18-0-50-c43i35vnjsv000b7g730-8111.direct.labs.play-with-docker.com/" #"http://teamcity:8111"
+          SERVER_URL: "http://ip172-18-0-50-$SESSION_ID-8111.direct.labs.play-with-docker.com/" #"http://teamcity:8111"
       ```
 2. Если хочется, можете создать свою собственную инфраструктуру на основе той технологии, которая нравится. Инструкция по установке из [документации](https://www.jetbrains.com/help/teamcity/installing-and-configuring-the-teamcity-server.html)
 3. Дождитесь запуска teamcity, выполните первоначальную настройку
